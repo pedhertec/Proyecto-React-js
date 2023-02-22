@@ -2,6 +2,11 @@ import React from "react";
 import ItemCount from "./ItemCount";
 
 const ItemDetail = ({ product }) => {
+
+  const onAdd = ( count ) => {
+    console.log(`seleccionó ${count}`);
+  }
+  
   return (
     <div style={styles.container}>
       <img alt={product.title} src={product.image} style={styles.image} />
@@ -9,7 +14,7 @@ const ItemDetail = ({ product }) => {
         <h1>{product.title}</h1>
         <span>{product.description}</span>
         <h2>{product.price}</h2>
-        <ItemCount/>
+        <ItemCount stock={7} onAdd={onAdd} />
       </div>
     </div>
   );

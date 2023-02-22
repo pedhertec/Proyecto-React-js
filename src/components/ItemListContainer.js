@@ -18,6 +18,7 @@ const ItemListContainer = ({ greeting }) => {
         const res = await fetch(url);
         const data = await res.json();
         setProducts(data);
+        
       } catch {
         setError(true);
       }
@@ -25,7 +26,7 @@ const ItemListContainer = ({ greeting }) => {
 
     getProducts();
 
-  }, [name]);
+  }, [name] );
 
 
   return (
@@ -47,6 +48,9 @@ const ItemListContainer = ({ greeting }) => {
   )
 }
 
+
+export default ItemListContainer;
+
 export const styles = {
   container: {
     display: "flex",
@@ -55,5 +59,3 @@ export const styles = {
     fontSize: "5vh",
   }
 }
-
-export default ItemListContainer;
