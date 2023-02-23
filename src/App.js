@@ -4,6 +4,7 @@ import ItemListContainer from './components/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import Error404 from './components/Error404';
 import Cart from './components/Cart'
+/* import ComponenteEventos from './components/ComponenteEventos'; */
 /* import ComponenteDeEstados from './components/ComponenteDeEstados'; */
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 /* import Users from './components/Users'; */
@@ -18,6 +19,8 @@ const App = () => {
     <>
     <BrowserRouter>    
         <NavBar/>
+{/*         <Users/> */}
+{/*         <ComponenteEventos/> */}
         <Routes>
         <Route path="/" element={<ItemListContainer greeting={text} />} />
         <Route path="/categories/:name" element={<ItemListContainer greeting={text} />}/>
