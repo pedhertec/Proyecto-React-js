@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import ItemCount from "./ItemCount";
+import { ProductProvider } from "../context/CartProductContext";
 
 const ItemDetail = ({ product }) => {
 
+  /* const { addProduct } = useContext(ProductProvider); */
+
   const onAdd = ( count ) => {
-    console.log(`seleccionó ${count}`);
-  }
+/*     addProduct(product, count); */
+  };
   
   return (
     <div style={styles.container}>

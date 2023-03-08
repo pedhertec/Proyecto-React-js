@@ -17,10 +17,15 @@ const ItemListContainer = ({ greeting }) => {
       try {
         const res = await fetch(url);
         const data = await res.json();
+
+        setTimeout(() => {
+
         setProducts(data);
+      }, 2000);
         
       } catch {
-        setError(true);
+          
+          setError(true);
       }
     };
 

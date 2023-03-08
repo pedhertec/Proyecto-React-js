@@ -3,11 +3,14 @@ import ItemDetail from "./ItemDetail";
 import { useParams } from "react-router-dom";
 
 
-const ItemDetailContainer = ( ) => {
+
+const ItemDetailContainer = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const url = `https://fakestoreapi.com/products/${id}`;
+
+
 
   useEffect(() => {
 
@@ -20,9 +23,10 @@ const ItemDetailContainer = ( ) => {
         setLoading(false);
       }
     };
-
+    
     getProduct();
-  }, [ ]);
+
+  }, []);
 
   return (
     <>
