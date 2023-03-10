@@ -15,9 +15,9 @@ export const ProductProvider = ( { children }) => {
   }, [cart]);
 
   const addProduct = ( product, qty ) => {
-    if (InCart(product.id)) {
-             //to do *****************************************************
-    } else {
+    if (IsInCart(product.id)) {
+      console.log(product); //************************************/
+        } else {
       setCart([...cart, { ...product, qty }]);
     }
   };
@@ -27,7 +27,7 @@ export const ProductProvider = ( { children }) => {
     setCart(cart.filter((product) => product.id !== id));     //funcion para borrar un producto del carrito
   };
 
-  const InCart = ( id ) => {
+  const IsInCart = ( id ) => {
     return cart.some((product) => product.id === id);   //funcion para validar un producto dentro del carrito
   };
 
@@ -37,8 +37,8 @@ export const ProductProvider = ( { children }) => {
 
   return (
     <CartProduct.Provider value={{ cart, addProduct, removeProduct, clear }}>
-      { children }
+      {children}
     </CartProduct.Provider>
-  )
+  );
 };
 

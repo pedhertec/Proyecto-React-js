@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CartProduct } from "../context/CartProductContext";
+
 
 const Cart = () => {
+  const { cart } = useContext(CartProduct);
   return (
-    <h2 style={styles.container}>Carrito en construcción... 🛠️</h2>
-  )
-}
+    <div>
+      {cart.map((product) => {
+        return <h1 key={product.id}>{product.title}</h1>;
+      })}
+    </div>
+  );
+};
 
-export default Cart
-
-const styles = {
-    container: {
-      display: "flex",
-      justifyContent: "center",
-    },
-  };
+export default Cart;
