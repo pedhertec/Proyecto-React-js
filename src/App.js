@@ -14,7 +14,7 @@ import './App.css';
 
 const App = () => {
 
-  const text = "Segunda entrega Proyecto React JS";
+  const text = "Entrega Final Proyecto React JS";
   
   return (
     <>

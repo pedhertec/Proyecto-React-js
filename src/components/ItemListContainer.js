@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 /* import ItemCount from './ItemCount'; */
 import ItemList from './ItemList';
 import { useParams } from "react-router-dom";
+import { dataBase } from "../firebase/firebase";
+import { getDocs, collection, query, where } from "firebase/firestore";
 
 
 const ItemListContainer = ({ greeting }) => {
@@ -9,11 +11,32 @@ const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(false);
   const { name } = useParams();
-  const url = name ? `https://fakestoreapi.com/products/category/${name}` : `https://fakestoreapi.com/products`
+/*   const url = name ? `https://fakestoreapi.com/products/category/${name}` : `https://fakestoreapi.com/products`*/
+  
 
-  useEffect(() => {
+useEffect(() => {
 
-    const getProducts = async () => {
+    const productsCollection = collection(dataBase, "productos");
+    const q = name
+      ? query(productsCollection, where("category", "==", name))
+      : productsCollection;
+  
+      getDocs(q)
+        .then((data) => {
+          const list = data.docs.map((product) => {
+            return {
+              ...product.data(),
+              id: product.id,
+            };
+          });
+          setProducts(list);
+        })
+
+        .catch(() => {
+          setError(true);
+        });
+
+/*     const getProducts = async () => {
       try {
         const res = await fetch(url);
         const data = await res.json();
@@ -29,7 +52,7 @@ const ItemListContainer = ({ greeting }) => {
       }
     };
 
-    getProducts();
+    getProducts(); */
 
   }, [name] );
 
@@ -43,7 +66,7 @@ const ItemListContainer = ({ greeting }) => {
           {products.length ? (
             <ItemList products={products} />
           ) : (
-            <h1>Cargando...</h1>
+            <h1 style={styles.h1}>Cargando...</h1>
           )}
         </>
       ) : (
@@ -62,5 +85,10 @@ export const styles = {
     alignItems: "center",
     justifyContent: "space-around",
     fontSize: "5vh",
+  },
+  h1: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   }
 }

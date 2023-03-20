@@ -4,7 +4,7 @@ import NavCategories from './NavCategories';
 import CartWidget from './CartWidget';
 import { Link } from "react-router-dom";
 
-const nombreUser = "Tutor"
+const nombreUser = "Profe"
 
 const NavBar = () => {
     return (

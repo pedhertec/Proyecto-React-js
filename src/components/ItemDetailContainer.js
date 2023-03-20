@@ -1,20 +1,37 @@
 import React, { useEffect, useState } from "react";
 import ItemDetail from "./ItemDetail";
 import { useParams } from "react-router-dom";
-
+import { dataBase } from "../firebase/firebase";
+import { doc, getDoc, collection } from "firebase/firestore";
 
 
 const ItemDetailContainer = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  const url = `https://fakestoreapi.com/products/${id}`;
+/*   const url = `https://fakestoreapi.com/products/${id}`; */
 
 
 
   useEffect(() => {
 
-    const getProduct = async () => {
+
+    const productsCollection = collection(dataBase,'productos');
+    const refDoc = doc(productsCollection,id)
+    getDoc(refDoc).then(
+      (data)=>{
+        setProduct({
+          id:data.id,
+          ...data.data(),
+        });
+      }
+    )
+    .finally(()=>{ 
+      setLoading(false);
+    })
+
+
+/*     const getProduct = async () => {
       try {
         const res = await fetch(url);
         const data = await res.json();
@@ -24,7 +41,7 @@ const ItemDetailContainer = () => {
       }
     };
     
-    getProduct();
+    getProduct(); */
 
   }, []);
 

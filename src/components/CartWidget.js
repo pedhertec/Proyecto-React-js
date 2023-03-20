@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from "react";
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded';
+import { CartProduct } from "../context/CartProductContext";
 
-const NavBar = () => {
+const CartWidget = () => {
+    const { totals } = useContext(CartProduct);
     return (
         <>
         <div style={styles.cartContainer}>
         <ShoppingCartRoundedIcon color="success" fontSize="large"/>
-        <p style={styles.p}> 0 </p>
+        {totals.qty > 0 &&  <p style={styles.p}> 0 </p>}
         </div>
         </>
-    )
-}
+    );
+};
 
 export const styles = {
     cartContainer: {
@@ -24,4 +26,4 @@ export const styles = {
     }
 }
 
-export default NavBar;
+export default CartWidget;

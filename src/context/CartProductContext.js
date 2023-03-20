@@ -4,20 +4,29 @@ export const CartProduct = createContext();
 
 export const ProductProvider = ( { children }) => {
   const  [ cart, setCart ] = useState([]);
-  const [qty, setQty] = useState(0);
+  const [totals, setTotals] = useState({ qty: 0, total: 0 });
 
   useEffect(() => {
     let qtyInitial = 0;
+    let total = 0;
     cart.forEach((product) => {
-      qtyInitial += product.qty;
+      qtyInitial += product.quantity;
+      total += product.quantity * product.price;
     });
-    setQty(qtyInitial);
+    setTotals({ qty: qtyInitial, total: total });
   }, [cart]);
 
+
   const addProduct = ( product, qty ) => {
-    if (IsInCart(product.id)) {
-      console.log(product); //************************************/
-        } else {
+    if (isInCart(product.id)) {
+      setCart(
+        cart.map((productCart) => {
+          if (productCart.id === product.id)
+            return { ...productCart, qty };
+          return productCart;
+        })
+      );
+    } else {
       setCart([...cart, { ...product, qty }]);
     }
   };
@@ -27,7 +36,7 @@ export const ProductProvider = ( { children }) => {
     setCart(cart.filter((product) => product.id !== id));     //funcion para borrar un producto del carrito
   };
 
-  const IsInCart = ( id ) => {
+  const isInCart = ( id ) => {
     return cart.some((product) => product.id === id);   //funcion para validar un producto dentro del carrito
   };
 
@@ -36,7 +45,7 @@ export const ProductProvider = ( { children }) => {
   };
 
   return (
-    <CartProduct.Provider value={{ cart, addProduct, removeProduct, clear }}>
+    <CartProduct.Provider value={{ cart, totals, addProduct, removeProduct, clear }}>
       {children}
     </CartProduct.Provider>
   );
