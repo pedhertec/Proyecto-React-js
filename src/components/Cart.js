@@ -11,24 +11,17 @@ const Cart = ( ) => {
   const { cart, totals, clearCart, removeProduct } = useContext(CartProduct);
   const [isPressedButton, setIsPressedButton] = useState(false);
 
-  
-  const buyer = {
-    name: "Juan",
-    apellido: "Perez",
-    email: "juanperez@gmail.com",
-  };
-  
-  
+ 
   const abrirPopUp = ( ) => {
     setIsPressedButton(true);
   };
   
   const handlerClickSell = () => {
     const sellCollection = collection(dataBase, "ventas");
-    addDoc(
+    addDoc( 
       sellCollection,
       {
-        buyer,
+/*         comprador,*/
         items: cart,
         total: totals.total,
         time: serverTimestamp(),
@@ -39,7 +32,7 @@ const Cart = ( ) => {
     };
     
     const handlerStock = () => { 
-      const docReference = doc(dataBase, 'productos', '3D2SRt4gIkJZUk2ujq1Q' );
+      const docReference = doc(dataBase, 'productos', '3D2SRt4gIkJZUk2ujq1Q' ); //para terminar
       updateDoc(docReference, { stock:50 })
     };
     
@@ -65,7 +58,7 @@ const Cart = ( ) => {
                   <h1>{product.title}</h1>
                   <h2>Precio: u$s {product.price}</h2>
                   <h2>Cantidad: {product.qty}</h2>
-                  <Button color="danger" outline onClick={removeProduct}>Eliminar</Button>
+{/*                   <Button color="danger" outline onClick={removeProduct}>Eliminar</Button> */} {/* revisar */}
                 </div>
               );
             })}
