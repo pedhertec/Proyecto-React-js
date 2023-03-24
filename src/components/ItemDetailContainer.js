@@ -47,7 +47,8 @@ const ItemDetailContainer = () => {
 
   return (
     <>
-      {<>{loading ? <h1>Cargando...</h1> : <ItemDetail product={product} />}</>}
+      {<>{loading ? <h1>Cargando...</h1> : <ItemDetail product={product} /> }</>}
+      
     </>
   );
 };

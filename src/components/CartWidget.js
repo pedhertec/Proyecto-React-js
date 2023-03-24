@@ -8,7 +8,7 @@ const CartWidget = () => {
         <>
         <div style={styles.cartContainer}>
         <ShoppingCartRoundedIcon color="success" fontSize="large"/>
-        {totals.qty > 0 &&  <p style={styles.p}> 0 </p>}
+        {totals.qty > 0 &&  <p style={styles.p} > {totals.qty} </p>}
         </div>
         </>
     );

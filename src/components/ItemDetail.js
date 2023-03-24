@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import ItemCount from "./ItemCount";
 import { Link } from "react-router-dom";
 import { CartProduct } from "../context/CartProductContext";
+import {Button } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const ItemDetail = ({ product }) => {
 
@@ -19,11 +21,11 @@ const ItemDetail = ({ product }) => {
       <div>
         <h1>{product.title}</h1>
         <span>{product.description}</span>
-        <h2>{product.price}</h2>
+        <h2>u$s {product.price}</h2>
   
         {isPressedButton ? (
           <Link to="/cart">
-            <button>Finalizar compra</button>
+            <Button color="primary" outline>Finalizar compra</Button>
           </Link>
         ) : (
           <ItemCount stock={7} onAdd={onAdd} />

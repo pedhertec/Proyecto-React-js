@@ -10,8 +10,8 @@ export const ProductProvider = ( { children }) => {
     let qtyInitial = 0;
     let total = 0;
     cart.forEach((product) => {
-      qtyInitial += product.quantity;
-      total += product.quantity * product.price;
+      qtyInitial += product.qty;
+      total += product.qty * product.price;
     });
     setTotals({ qty: qtyInitial, total: total });
   }, [cart]);
@@ -32,7 +32,6 @@ export const ProductProvider = ( { children }) => {
   };
 
   const removeProduct = ( id ) => { 
-    const product = cart.find((product) => product.id === id);
     setCart(cart.filter((product) => product.id !== id));     //funcion para borrar un producto del carrito
   };
 
@@ -40,12 +39,13 @@ export const ProductProvider = ( { children }) => {
     return cart.some((product) => product.id === id);   //funcion para validar un producto dentro del carrito
   };
 
-  const clear = ( ) => {
+  const clearCart = ( ) => {
     setCart([]);   //funcion para limpiar el carrito
   };
 
+
   return (
-    <CartProduct.Provider value={{ cart, totals, addProduct, removeProduct, clear }}>
+    <CartProduct.Provider value={{ cart, totals, addProduct, removeProduct, clearCart }}>
       {children}
     </CartProduct.Provider>
   );

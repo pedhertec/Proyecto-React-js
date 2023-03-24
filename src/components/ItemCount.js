@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+import {Button } from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const ItemCount = ({ onAdd, stock }) => {
   const [count, setCount] = useState(1);
@@ -13,19 +15,19 @@ const ItemCount = ({ onAdd, stock }) => {
     if (count > 1) setCount(count - 1);
   };
   
-  const handlerSelect = () => {
+/*   const handlerSelect = () => {
     if (count > 1) {
       setCount(count - 1);
     }
-  };
+  }; */
 
   return (
     <>
     <div style={styles.container}>
-      <button onClick={handlerAdd}>➕</button>
+      <Button color="primary" outline onClick={handlerAdd}>+</Button>
       <h1>{count}</h1>
-      <button onClick={handlerSubtract}>➖</button>
-      <button onClick={() => onAdd(count)}>Añadir al carrito</button>
+      <Button color="primary" outline onClick={handlerSubtract}>-</Button>
+      <Button color="primary" outline onClick={() => onAdd(count)}>Añadir</Button>
     </div>
     </>
   );

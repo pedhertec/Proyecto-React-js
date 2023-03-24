@@ -60,7 +60,6 @@ useEffect(() => {
   return (
     <>
       <div style={styles.container}> {greeting} </div>
-
       {!error ? (
         <>
           {products.length ? (
