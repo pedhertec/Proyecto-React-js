@@ -11,50 +11,50 @@ const ItemListContainer = ({ greeting }) => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(false);
   const { name } = useParams();
-/*   const url = name ? `https://fakestoreapi.com/products/category/${name}` : `https://fakestoreapi.com/products`*/
-  
+  /*   const url = name ? `https://fakestoreapi.com/products/category/${name}` : `https://fakestoreapi.com/products`*/
 
-useEffect(() => {
+
+  useEffect(() => {
 
     const productsCollection = collection(dataBase, "productos");
     const q = name
       ? query(productsCollection, where("category", "==", name))
       : productsCollection;
-  
-      getDocs(q)
-        .then((data) => {
-          const list = data.docs.map((product) => {
-            return {
-              ...product.data(),
-              id: product.id,
-            };
-          });
-          setProducts(list);
-        })
 
-        .catch(() => {
-          setError(true);
+    getDocs(q)
+      .then((data) => {
+        const list = data.docs.map((product) => {
+          return {
+            ...product.data(),
+            id: product.id,
+          };
         });
+        setProducts(list);
+      })
 
-/*     const getProducts = async () => {
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
+      .catch(() => {
+        setError(true);
+      });
 
-        setTimeout(() => {
+    /*     const getProducts = async () => {
+          try {
+            const res = await fetch(url);
+            const data = await res.json();
+    
+            setTimeout(() => {
+    
+            setProducts(data);
+          }, 2000);
+            
+          } catch {
+              
+              setError(true);
+          }
+        };
+    
+        getProducts(); */
 
-        setProducts(data);
-      }, 2000);
-        
-      } catch {
-          
-          setError(true);
-      }
-    };
-
-    getProducts(); */
-
-  }, [name] );
+  }, [name]);
 
 
   return (
@@ -65,7 +65,11 @@ useEffect(() => {
           {products.length ? (
             <ItemList products={products} />
           ) : (
-            <h1 style={styles.h1}>Cargando...</h1>
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
           )}
         </>
       ) : (

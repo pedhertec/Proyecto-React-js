@@ -2,34 +2,20 @@ import React, { useState, useContext } from 'react'
 import { CartProduct } from "../context/CartProductContext";
 import { Link } from "react-router-dom";
 import DatosComprador from './DatosComprador';
-import { collection, addDoc, serverTimestamp, doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import { dataBase } from "../firebase/firebase";
-import {Button } from 'reactstrap';
+import {Button } from 'reactstrap'; 
 import 'bootstrap/dist/css/bootstrap.css';
 
 const Cart = ( ) => {
-  const { cart, totals, clearCart, removeProduct } = useContext(CartProduct);
+  const { cart, totals, clearCart, /* removeProduct */ } = useContext(CartProduct);
   const [isPressedButton, setIsPressedButton] = useState(false);
 
- 
+
   const abrirPopUp = ( ) => {
     setIsPressedButton(true);
   };
   
-  const handlerClickSell = () => {
-    const sellCollection = collection(dataBase, "ventas");
-    addDoc( 
-      sellCollection,
-      {
-/*         comprador,*/
-        items: cart,
-        total: totals.total,
-        time: serverTimestamp(),
-      }
-      )
-      .then(result=>console.log(result.id))
-      
-    };
     
     const handlerStock = () => { 
       const docReference = doc(dataBase, 'productos', '3D2SRt4gIkJZUk2ujq1Q' ); //para terminar
@@ -38,7 +24,6 @@ const Cart = ( ) => {
     
     const todoEnClick = ( ) => { 
       abrirPopUp();
-      handlerClickSell();
       handlerStock();
   };
   
